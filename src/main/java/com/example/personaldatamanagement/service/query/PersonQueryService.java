@@ -1,11 +1,12 @@
 package com.example.personaldatamanagement.service.query;
 
-
 import com.example.personaldatamanagement.dao.entity.Person;
 import com.example.personaldatamanagement.dao.entity.PersonRepository;
 import com.example.personaldatamanagement.service.exception.PersonNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class PersonQueryService {
@@ -21,13 +22,9 @@ public class PersonQueryService {
         return personRepository.findAll();
     }
 
-    //in refactoring mode: check OPTIONAL option instead traditional
-    public Person findById(Long id){
-        Person person = personRepository.findOne(id);
+//    in refactoring mode: check OPTIONAL option instead traditional
+    public Optional<Person> findById(Long id){
 
-        if(person == null){
-            throw new PersonNotFoundException();
-        }
-        return person;
+        return personRepository.findById(id);
     }
 }
